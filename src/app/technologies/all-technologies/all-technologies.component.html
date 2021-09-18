@@ -26,11 +26,10 @@
                     </div>
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive" *ngIf="technologies$ | async as technologies">
                     <table class="table table-bordered table-striped" id="data">
                         <thead>
                             <tr>
-                                <th>S.No</th>
                                 <th>Title</th>
                                 <th>Duration</th>
                                 <th>Status</th>
@@ -39,15 +38,18 @@
                         </thead>
                         <tbody>
                             <tr *ngFor='let technology of technologies'>
-                                <td>{{technology.sno}}</td>
                                 <td>{{technology.title}}</td>
                                 <td>{{technology.duration}}</td>
-                                <td><a class="badge bg-success">Active</a></td>
+                                <td><a [class.bg-danger]="!technology.active" [class.bg-success]="technology.active" class="badge">
+                                  {{technology.active ? 'Active' : 'In-Active'}}
+                                </a></td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm me-2" role="button" (click)="addTechnology()"><i
-                                            class="fa fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-sm" role="button" (click)="confirmation()"><i
-                                            class="fa fa-trash"></i></a>
+                                    <a class="btn btn-primary btn-sm me-2" role="button" (click)="addTechnology()">
+                                      <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" role="button" (click)="confirmation(technology)">
+                                      <i class="fa fa-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

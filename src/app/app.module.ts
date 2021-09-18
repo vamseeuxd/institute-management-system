@@ -20,6 +20,9 @@ import { AddTechnologiesComponent } from './technologies/add-technologies/add-te
 import { ConfirmPopupComponent } from './shared/confirm-popup/confirm-popup.component';
 import { AllBatchesComponent } from './batches/all-batches/all-batches.component';
 import { AddBatchesComponent } from './batches/add-batches/add-batches.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,16 +39,26 @@ import { AddBatchesComponent } from './batches/add-batches/add-batches.component
     AddTechnologiesComponent,
     ConfirmPopupComponent,
     AllBatchesComponent,
-    AddBatchesComponent
+    AddBatchesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FormsModule,
+    AngularFireModule.initializeApp({
+      apiKey: 'AIzaSyAMyhTmxJEZ45-bW7o3rgcDzF8Etts004E',
+      authDomain: 'imsys0.firebaseapp.com',
+      projectId: 'imsys0',
+      storageBucket: 'imsys0.appspot.com',
+      messagingSenderId: '990086332519',
+      appId: '1:990086332519:web:c476bfd0e678a9c40214c2',
+    }),
+    AngularFirestoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

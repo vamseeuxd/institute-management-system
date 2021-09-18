@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "imsys0"
+  },
+  "targets": {
+    "imsys0": {
+      "hosting": {
+        "institute-management-system": [
+          "imsys0"
+        ]
+      }
+    }
+  }
+}

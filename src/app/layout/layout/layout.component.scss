@@ -2,8 +2,9 @@
   .main-container {
     padding: 20px;
     margin-top: 55px;
-    margin-left: 225px;
+    margin-left: 0px;
     min-height: calc(100vh - 100px);
+    transition: all linear 0.3s;
   }
 }
 

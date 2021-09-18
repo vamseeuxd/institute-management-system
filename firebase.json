@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/institute-management-system",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

@@ -1,11 +1,11 @@
 <div class="wrapper">
     <header>
-        <app-topbar></app-topbar>
+        <app-topbar [(showMenu)]="showMenu"></app-topbar>
     </header>
     <aside>
-        <app-sidebar></app-sidebar>
+        <app-sidebar [style.left.px]="showMenu ? 0 : -255"></app-sidebar>
     </aside>
-    <div class="main-container">
+    <div [style.marginLeft.px]="showMenu ? 225 : 0" class="main-container">
         <router-outlet></router-outlet>
     </div>
 </div>

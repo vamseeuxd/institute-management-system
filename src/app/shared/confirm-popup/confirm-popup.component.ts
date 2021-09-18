@@ -1,5 +1,5 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-popup',
@@ -9,19 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class ConfirmPopupComponent implements OnInit {
 
   modalRef?: BsModalRef;
-  message?: string;
-
+  @Input() message?: string;
+  onClose: any;
   // constructor(private modalService: BsModalService) { }
   constructor(public bsModalRef: BsModalRef) {}
 
   confirm(): void {
-    this.message = 'Confirmed!';
-    this.modalRef?.hide();
+    this.onClose(true)
   }
- 
+
   decline(): void {
-    this.message = 'Declined!';
-    this.modalRef?.hide();
+    this.onClose(false)
   }
 
 

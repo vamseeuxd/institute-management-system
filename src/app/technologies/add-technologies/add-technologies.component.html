@@ -5,31 +5,31 @@
     </a>
 </div>
 <div class="modal-body">
-    <form>
+    <form #sampleForm="ngForm">
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Title<sup>*</sup></label>
-                    <input type="text" class="form-control" id="title" formControlName="title">
+                    <input type="text" autocomplete="off" required ngModel name="title" class="form-control" id="title">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Duration<sup>*</sup></label>
-                    <input type="text" class="form-control" id="duration" formControlName="duration">
+                    <input type="number" required ngModel name="duration" class="form-control" id="duration">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Status<sup>*</sup></label>
-                    <select class="form-control" id="status" formControlName="status">
-                        <option value="Active" selected>Active</option>
-                        <option value="In-active">In-active</option>
+                    <select class="form-control" name="active"  required ngModel id="status">
+                        <option [ngValue]="true" selected>Active</option>
+                        <option [ngValue]="false">In-active</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
-                <button type="button" class="btn btn-primary me-2"><i
+                <button type="button" (click)="addTechnolgy(sampleForm)" [disabled]="sampleForm.invalid" class="btn btn-primary me-2"><i
                         class="fa fa-check-circle  pe-2"></i>Submit</button>
                 <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">
                     <i class="fa fa-close pe-2"></i>Close

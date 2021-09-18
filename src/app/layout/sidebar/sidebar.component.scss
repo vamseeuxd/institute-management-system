@@ -7,6 +7,7 @@
   padding: 48px 0 0;
   width: 220px;
   background-color: #1b92b1;
+  transition: all linear 0.3s;
 
   .sidebar-sticky {
     position: relative;
@@ -44,8 +45,8 @@
 
 }
 
-@media (max-width:767px) {
+/* @media (max-width:767px) {
   :host {
     display: none;
   }
-}
+} */
