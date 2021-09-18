@@ -1,0 +1,51 @@
+:host {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 48px 0 0;
+  width: 220px;
+  background-color: #1b92b1;
+
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .nav-item {
+    margin: 2px 0;
+    padding: 3px 0;
+
+
+
+    .nav-link {
+      color: #FFF;
+      font-size: 15px;
+
+      &:hover {
+        color: #c0f2ff;
+      }
+    }
+
+    i {
+      width: 30px;
+      font-size: 16px;
+    }
+
+    .active {
+      color: #c0f2ff;
+    }
+  }
+
+}
+
+@media (max-width:767px) {
+  :host {
+    display: none;
+  }
+}

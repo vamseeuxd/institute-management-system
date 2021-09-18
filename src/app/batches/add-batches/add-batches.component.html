@@ -1,0 +1,76 @@
+<div class="modal-header bg-primary">
+    <h4 class="modal-title text-white pull-left"><strong>{{pageTitle}}</strong></h4>
+    <a class="close pull-right text-white" aria-label="Close" role="button" (click)="bsModalRef.hide()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="row">
+            <div class="col-md-6 col-md-6">
+                <div class="form-group">
+                    <label>Batch Name<sup>*</sup></label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                </div>
+            </div>
+            <div class="col-md-6 col-md-6">
+                <div class="form-group">
+                    <label>Start Date<sup>*</sup></label>
+                    <input type="date" class="form-control" id="sDate" formControlName="sDate">
+                </div>
+            </div>
+            <div class="col-md-6 col-md-6">
+                <div class="form-group">
+                    <label>End Date<sup>*</sup></label>
+                    <input type="date" class="form-control" id="eDate" formControlName="eDate">
+                </div>
+            </div>
+            <div class="col-md-6 col-md-6">
+                <div class="form-group">
+                    <label>Duration<sup>*</sup></label>
+                    <input type="text" class="form-control" id="duration" formControlName="duration">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label>Select Technology<sup>*</sup></label>
+                    <select class="form-control" id="technology" formControlName="technology">
+                        <option value="" selected>Please Select</option>
+                        <option value="1">Web Design</option>
+                        <option value="2">Mean Stock Developer</option>
+                        <option value="3">Full Stock Developer</option>
+                        <option value="4">Graphic Designing</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label>Select Faculty<sup>*</sup></label>
+                    <select class="form-control" id="faculty" formControlName="faculty">
+                        <option value="" selected>Please Select</option>
+                        <option value="1">Sravan Kumar</option>
+                        <option value="2">Satyam Ganta</option>
+                        <option value="3">Praveen Guptha</option>
+                        <option value="4">Vamsee Krishna</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-6">
+                <div class="form-group">
+                    <label>Status<sup>*</sup></label>
+                    <select class="form-control" id="status" formControlName="status">
+                        <option value="Active" selected>Active</option>
+                        <option value="In-active">In-active</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary me-2"><i
+                        class="fa fa-check-circle  pe-2"></i>Submit</button>
+                <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">
+                    <i class="fa fa-close pe-2"></i>Close
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

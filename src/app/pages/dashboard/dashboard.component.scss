@@ -1,0 +1,30 @@
+:host {
+  .border-left-primary {
+    border-left: 4px solid #4e73df;
+  }
+
+  .border-left-success {
+    border-left: 4px solid #1cc88a;
+  }
+
+  .border-left-info {
+    border-left: 4px solid #36b9cc;
+  }
+
+  .border-left-warning {
+    border-left: 4px solid #f6c23e;
+  }
+
+  .text-xs {
+    font-size: .85rem;
+    font-weight: 600;
+  }
+
+  .text-gray-300 {
+    color: #ccc;
+  }
+
+  .progress-sm {
+    height: .5rem;
+  }
+}

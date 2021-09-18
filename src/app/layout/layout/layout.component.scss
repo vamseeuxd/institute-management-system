@@ -1,0 +1,16 @@
+:host {
+  .main-container {
+    padding: 20px;
+    margin-top: 55px;
+    margin-left: 225px;
+    min-height: calc(100vh - 100px);
+  }
+}
+
+@media (max-width:767px) {
+  :host {
+    .main-container {
+      margin-left: 0;
+    }
+  }
+}

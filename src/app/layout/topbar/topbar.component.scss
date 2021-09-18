@@ -1,0 +1,25 @@
+:host {
+  .c-dropdown {
+    right: 0 !important;
+    min-width: 150px;
+    z-index: 22;
+
+    .dropdown-item {
+      padding: 0.7rem 1.2rem;
+
+      i {
+        color: #666;
+        padding-right: 8px;
+      }
+
+      &:focus {
+        background-color: #e9ecef;
+      }
+    }
+  }
+
+  .c-drop-btn {
+    font-size: 24px;
+    color: #545454;
+  }
+}

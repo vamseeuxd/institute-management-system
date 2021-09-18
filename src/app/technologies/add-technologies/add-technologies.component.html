@@ -1,0 +1,40 @@
+<div class="modal-header bg-primary">
+    <h4 class="modal-title text-white pull-left"><strong>{{pageTitle}}</strong></h4>
+    <a class="close pull-right text-white" aria-label="Close" role="button" (click)="bsModalRef.hide()">
+        <i class="fa fa-close"></i>
+    </a>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Title<sup>*</sup></label>
+                    <input type="text" class="form-control" id="title" formControlName="title">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Duration<sup>*</sup></label>
+                    <input type="text" class="form-control" id="duration" formControlName="duration">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Status<sup>*</sup></label>
+                    <select class="form-control" id="status" formControlName="status">
+                        <option value="Active" selected>Active</option>
+                        <option value="In-active">In-active</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary me-2"><i
+                        class="fa fa-check-circle  pe-2"></i>Submit</button>
+                <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">
+                    <i class="fa fa-close pe-2"></i>Close
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

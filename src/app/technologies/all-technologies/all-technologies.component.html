@@ -1,0 +1,59 @@
+<div class="main-title">
+    <h4 class="text-primary pull-left"><strong>{{pageTitle}}</strong></h4>
+    <div class="pull-right">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']"><i class="fa fa-home"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">All Technologies</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="c-panel">
+            <div class="c-panel-body">
+                <div class="d-flex justify-content-between sub-title">
+                    <div>
+                        <h6 class="title text-secondary pt-2">
+                            List of technologies
+                        </h6>
+                    </div>
+                    <div class="mb-3">
+                        <a (click)="addTechnology()" class="btn btn-primary"><i class="fa fa-plus-circle pe-2"></i>Add
+                            Technology</a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="data">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Title</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let technology of technologies'>
+                                <td>{{technology.sno}}</td>
+                                <td>{{technology.title}}</td>
+                                <td>{{technology.duration}}</td>
+                                <td><a class="badge bg-success">Active</a></td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm me-2" role="button" (click)="addTechnology()"><i
+                                            class="fa fa-edit"></i></a>
+                                    <a class="btn btn-danger btn-sm" role="button" (click)="confirmation()"><i
+                                            class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
