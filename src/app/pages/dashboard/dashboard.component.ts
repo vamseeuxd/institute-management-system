@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +11,18 @@ export class DashboardComponent implements OnInit {
 
   pageTitle = 'Dashboard';
 
-  constructor() { }
+  students$:Observable<any[]>;
+  faculties$:Observable<any[]>;
+  technologies$:Observable<any[]>;
+
+
+  constructor(
+    private database: AngularFirestore
+  ) {
+    this.students$ = this.database.collection<any>('students').valueChanges({ idField: 'id' });
+    this.faculties$ = this.database.collection<any>('faculties').valueChanges({ idField: 'id' });
+    this.technologies$ = this.database.collection<any>('technologies').valueChanges({ idField: 'id' });
+  }
 
   ngOnInit(): void {
   }

@@ -1,3 +1,4 @@
+import { LoadingService } from './../../shared/loading-service/loading.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ConfirmPopupComponent } from 'src/app/shared/confirm-popup/confirm-popup.component';
@@ -29,6 +30,7 @@ export class AllTechnologiesComponent implements OnInit {
   modalRef?: BsModalRef;
   constructor(
     private modalService: BsModalService,
+    private loading: LoadingService,
     private database: AngularFirestore
   ) {
     this.technologiesTable =
@@ -36,28 +38,40 @@ export class AllTechnologiesComponent implements OnInit {
     this.technologies$ = this.technologiesTable.valueChanges({ idField: 'id' });
   }
 
-  addTechnology() {
-    this.modalRef = this.modalService.show(AddTechnologiesComponent, {
-      class: 'modal-md',
-    });
+  addTechnology(
+    isNew = true,
+    dataToUpdate: ITechnology | undefined = undefined
+  ) {
+    if (isNew) {
+      this.modalRef = this.modalService.show(AddTechnologiesComponent, {
+        class: 'modal-md',
+      });
+    } else if (dataToUpdate) {
+      this.modalRef = this.modalService.show(AddTechnologiesComponent, {
+        class: 'modal-md',
+      });
+      this.modalRef.content.data = dataToUpdate;
+    }
   }
 
   confirmation(technology: ITechnology) {
     this.modalRef = this.modalService.show(ConfirmPopupComponent, {
       class: 'modal-sm',
     });
-    console.log(this.modalRef.content);
     this.modalRef.content.onClose = (isConfirm: boolean) => {
       if (isConfirm) {
         if (technology && technology.id) {
+          const loaderId = this.loading.show();
           this.technologiesTable
             .doc(technology.id)
             .delete()
             .then(() => {
               this.modalRef?.hide();
+              this.loading.hide(loaderId);
             })
             .catch((error) => {
               console.log(error);
+              this.loading.hide(loaderId);
             });
         }
       } else {

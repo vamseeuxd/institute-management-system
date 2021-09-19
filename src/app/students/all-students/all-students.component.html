@@ -1,64 +1,65 @@
 <div class="main-title">
-    <h4 class="text-primary pull-left"><strong>{{pageTitle}}</strong></h4>
-    <div class="pull-right">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a [routerLink]="['/dashboard']"><i class="fa fa-home"></i></a></li>
-                <li class="breadcrumb-item active" aria-current="page">All Students</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="clear"></div>
+  <h4 class="text-primary pull-left"><strong>{{pageTitle}}</strong></h4>
+  <div class="pull-right">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a [routerLink]="['/dashboard']"><i class="fa fa-home"></i></a></li>
+              <li class="breadcrumb-item active" aria-current="page">All students</li>
+          </ol>
+      </nav>
+  </div>
+  <div class="clear"></div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <div class="c-panel">
-            <div class="c-panel-body">
-                <div class="d-flex justify-content-between sub-title">
-                    <div>
-                        <h6 class="title text-secondary pt-2">
-                            List of students
-                        </h6>
-                    </div>
-                    <div class="mb-3">
-                        <a [routerLink]="['/addStudents']" class="btn btn-primary"><i
-                                class="fa fa-plus-circle pe-2"></i>Add
-                            Student</a>
-                    </div>
-                </div>
+  <div class="col-md-12">
+      <div class="c-panel">
+          <div class="c-panel-body">
+              <div class="d-flex justify-content-between sub-title">
+                  <div>
+                      <h6 class="title text-secondary pt-2">
+                          List of students
+                      </h6>
+                  </div>
+                  <div class="mb-3">
+                      <a [routerLink]="['/addstudent']" class="btn btn-primary"><i
+                              class="fa fa-plus-circle pe-2"></i>Add
+                          students</a>
+                  </div>
+              </div>
 
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="data">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Joined Date</th>
-                                <th>Referred By</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor='let student of students'>
-                                <td>{{student.id}}</td>
-                                <td>{{student.name}}</td>
-                                <td>{{student.email}}</td>
-                                <td>{{student.mobile}}</td>
-                                <td>{{student.date}}</td>
-                                <td>{{student.referred}}</td>
-                                <td><a class="badge bg-success">Active</a></td>
-                                <td>
-                                    <a class="btn btn-primary btn-sm me-2" role="button"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-sm" role="button"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+              <div class="table-responsive" *ngIf="students$ | async as students">
+                <!-- <pre>{{students | json}}</pre> -->
+                  <table class="table table-bordered table-striped" id="data">
+                      <thead>
+                          <tr>
+                              <th *ngFor="let key of fields">{{key|titlecase}}</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr  *ngFor="let student of students">
+                              <td *ngFor="let key of fields">
+                                <ng-container [ngSwitch]="key">
+                                  <ng-container *ngSwitchCase="'status'">
+                                    <a [class.bg-danger]="!student.status" [class.bg-success]="student.status" class="badge">
+                                      {{ student.status ? "Active" : "In-Active" }}
+                                    </a>
+                                  </ng-container>
+                                  <ng-container *ngSwitchDefault>
+                                    {{student[key]}}
+                                  </ng-container>
+                                </ng-container>
+
+                              </td>
+                              <td>
+                                <a [routerLink]="['/addstudent', student.id]" class="btn btn-primary btn-sm me-2" role="button"><i class="fa fa-edit"></i></a>
+                                <a (click)="confirmation(student)" class="btn btn-danger btn-sm" role="button"><i class="fa fa-trash"></i></a>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

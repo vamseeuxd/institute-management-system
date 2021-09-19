@@ -1,4 +1,9 @@
+import { ConfirmPopupComponent } from './../../shared/confirm-popup/confirm-popup.component';
+import { LoadingService } from './../../shared/loading-service/loading.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-all-students',
@@ -6,69 +11,56 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-students.component.scss']
 })
 export class AllStudentsComponent implements OnInit {
+  fields = [
+    'first_Name',
+    'last_Name',
+    'mobile',
+    'email',
+    'address',
+    'status',
+  ];
 
-  constructor() { }
+  studentsTable: AngularFirestoreCollection<any>;
+  students$: Observable<any[]>;
+  modalRef?: BsModalRef;
+  constructor(
+    private modalService: BsModalService,
+    private loading: LoadingService,
+    private database: AngularFirestore
+  ) {
+    this.studentsTable = this.database.collection<any>('students');
+    this.students$ = this.studentsTable.valueChanges({ idField: 'id' });
+  }
 
   pageTitle = 'Student Management';
 
   ngOnInit(): void {
+
   }
-  students: any = [
-    {
-      id: 'IMS12345',
-      name: 'Satyam Ganta',
-      email: 'satyamganta@gmail.com',
-      mobile: '9652544441',
-      date: '28 Dec 2020',
-      referred: 'Kumar'
-    },
-    {
-      id: 'IMS32346',
-      name: 'Santhosh Sikolla',
-      email: 'santhosh.s@gmail.com',
-      mobile: '9848245458',
-      date: '28 Dec 2020',
-      referred: 'Vamsee'
-    },
-    {
-      id: 'IMS42376',
-      name: 'Praveen Guptha',
-      email: 'praveen.g@gmail.com',
-      mobile: '9848518190',
-      date: '28 Dec 2020',
-      referred: 'Rajesh'
-    },
-    {
-      id: 'IMS12345',
-      name: 'Satyam Ganta',
-      email: 'satyamganta@gmail.com',
-      mobile: '9652544441',
-      date: '28 Dec 2020',
-      referred: 'Kumar'
-    },
-    {
-      id: 'IMS25345',
-      name: 'Sravan Kumar',
-      email: 'sravan.k@gmail.com',
-      mobile: '9848518190',
-      date: '28 Dec 2020',
-      referred: 'Rajesh'
-    },
-    {
-      id: 'IMS42376',
-      name: 'Santhosh Sikolla',
-      email: 'santhosh.s@gmail.com',
-      mobile: '9848245458',
-      date: '28 Dec 2020',
-      referred: 'Vamsee'
-    },
-    {
-      id: 'IMS25345',
-      name: 'Praveen Guptha',
-      email: 'praveen.g@gmail.com',
-      mobile: '9848518190',
-      date: '28 Dec 2020',
-      referred: 'Rajesh'
-    },
-  ]
+
+  confirmation(Student: any) {
+    this.modalRef = this.modalService.show(ConfirmPopupComponent, {
+      class: 'modal-sm',
+    });
+    this.modalRef.content.onClose = (isConfirm: boolean) => {
+      if (isConfirm) {
+        if (Student && Student.id) {
+          const loaderId = this.loading.show();
+          this.studentsTable
+            .doc(Student.id)
+            .delete()
+            .then(() => {
+              this.modalRef?.hide();
+              this.loading.hide(loaderId);
+            })
+            .catch((error) => {
+              console.log(error);
+              this.loading.hide(loaderId);
+            });
+        }
+      } else {
+        this.modalRef?.hide();
+      }
+    };
+  }
 }

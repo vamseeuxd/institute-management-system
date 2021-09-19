@@ -27,32 +27,33 @@
                     </div>
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive" *ngIf="faculties$ | async as faculties">
+                  <!-- <pre>{{faculties | json}}</pre> -->
                     <table class="table table-bordered table-striped" id="data">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Joined Date</th>
-                                <th>Experience</th>
-                                <th>Status</th>
+                                <th *ngFor="let key of fields">{{key|titlecase}}</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor='let faculty of faculties'>
-                                <td>{{faculty.id}}</td>
-                                <td>{{faculty.name}}</td>
-                                <td>{{faculty.email}}</td>
-                                <td>{{faculty.mobile}}</td>
-                                <td>{{faculty.experience}}</td>
-                                <td>{{faculty.referred}}</td>
-                                <td><a class="badge bg-success">Active</a></td>
+                            <tr  *ngFor="let faculty of faculties">
+                                <td *ngFor="let key of fields">
+                                  <ng-container [ngSwitch]="key">
+                                    <ng-container *ngSwitchCase="'status'">
+                                      <a [class.bg-danger]="!faculty.status" [class.bg-success]="faculty.status" class="badge">
+                                        {{ faculty.status ? "Active" : "In-Active" }}
+                                      </a>
+                                    </ng-container>
+                                    <ng-container *ngSwitchDefault>
+                                      {{faculty[key]}}
+                                    </ng-container>
+                                  </ng-container>
+
+                                </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm me-2" role="button"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-sm" role="button"><i class="fa fa-trash"></i></a>
+                                  <a [routerLink]="['/addFaculties', faculty.id]" class="btn btn-primary btn-sm me-2" role="button"><i class="fa fa-edit"></i></a>
+                                  <a (click)="confirmation(faculty)" class="btn btn-danger btn-sm" role="button"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         </tbody>

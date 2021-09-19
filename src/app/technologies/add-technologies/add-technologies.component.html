@@ -10,27 +10,31 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Title<sup>*</sup></label>
-                    <input type="text" autocomplete="off" required ngModel name="title" class="form-control" id="title">
+                    <input type="text" [ngModel]="data ? data.title : ''" autocomplete="off" required ngModel name="title" class="form-control" id="title">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Duration<sup>*</sup></label>
-                    <input type="number" required ngModel name="duration" class="form-control" id="duration">
+                    <input type="number" [ngModel]="data ? data.duration : null" required ngModel name="duration" class="form-control" id="duration">
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
                     <label>Status<sup>*</sup></label>
-                    <select class="form-control" name="active"  required ngModel id="status">
+                    <select class="form-control" [ngModel]="data ? data.active : true" name="active"  required ngModel id="status">
                         <option [ngValue]="true" selected>Active</option>
                         <option [ngValue]="false">In-active</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-12">
-                <button type="button" (click)="addTechnolgy(sampleForm)" [disabled]="sampleForm.invalid" class="btn btn-primary me-2"><i
-                        class="fa fa-check-circle  pe-2"></i>Submit</button>
+                <button type="button" (click)="addTechnolgy(sampleForm)"
+                       [disabled]="sampleForm.invalid"
+                        class="btn btn-primary me-2">
+                        <i class="fa fa-check-circle  pe-2"></i>
+                        {{data ? 'Update Technology' : 'Add Technology'}}
+                    </button>
                 <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">
                     <i class="fa fa-close pe-2"></i>Close
                 </button>

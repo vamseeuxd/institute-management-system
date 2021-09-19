@@ -1,3 +1,4 @@
+import { LoadingService } from './../../shared/loading-service/loading.service';
 import { ITechnology } from './../all-technologies/all-technologies.component';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -15,10 +16,12 @@ import { NgForm } from '@angular/forms';
 export class AddTechnologiesComponent implements OnInit {
   technologiesTable: AngularFirestoreCollection<ITechnology>;
   pageTitle = 'Add Technology';
+  data: ITechnology | undefined;
 
   constructor(
     public bsModalRef: BsModalRef,
-    private database: AngularFirestore
+    private database: AngularFirestore,
+    private loading: LoadingService,
   ) {
     this.technologiesTable =
       this.database.collection<ITechnology>('technologies');
@@ -28,14 +31,33 @@ export class AddTechnologiesComponent implements OnInit {
 
   addTechnolgy(form: NgForm) {
     // alert(JSON.stringify(form.value, null, 2));
-    this.technologiesTable
-      .add(form.value)
-      .then((val) => {
-        form.resetForm({});
-        this.bsModalRef.hide();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (this.data) {
+      const loaderId = this.loading.show();
+      this.technologiesTable
+        .doc(this.data.id)
+        .update(form.value)
+        .then(() => {
+          form.resetForm({});
+          this.bsModalRef.hide();
+          this.loading.hide(loaderId);
+        })
+        .catch((error) => {
+          console.log(error);
+          this.loading.hide(loaderId);
+        });
+    } else {
+      const loaderId = this.loading.show();
+      this.technologiesTable
+        .add(form.value)
+        .then((val) => {
+          form.resetForm({});
+          this.bsModalRef.hide();
+          this.loading.hide(loaderId);
+        })
+        .catch((error) => {
+          console.log(error);
+          this.loading.hide(loaderId);
+        });
+    }
   }
 }

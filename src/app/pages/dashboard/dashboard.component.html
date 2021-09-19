@@ -1,122 +1,171 @@
 <div class="main-title">
-    <h4 class="text-primary pull-left"><strong>{{pageTitle}}</strong></h4>
-    <div class="pull-right">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="clear"></div>
+  <h4 class="text-primary pull-left">
+    <strong>{{ pageTitle }}</strong>
+  </h4>
+  <div class="pull-right">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="clear"></div>
 </div>
 <div class="row mb-2">
-    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-success shadow-sm h-100 py-2">
-            <div class="card-body">
-                <a [routerLink]="['/students']">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Total Students</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">34,635</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa fa-user fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </a>
+  <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+    <div class="card border-left-success shadow-sm h-100 py-2">
+      <div class="card-body">
+        <a [routerLink]="['/students']">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="
+                  text-xs
+                  font-weight-bold
+                  text-success text-uppercase
+                  mb-1
+                "
+              >
+                Total Students
+              </div>
+              <div
+                class="h5 mb-0 font-weight-bold text-gray-800"
+                *ngIf="students$ | async as students"
+              >
+                {{ students.length }}
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-primary shadow-sm h-100 py-2">
-            <div class="card-body">
-                <a [routerLink]="['/faculties']">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Total Faculties</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">1,250</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </a>
+            <div class="col-auto">
+              <i class="fa fa-user fa-2x text-gray-300"></i>
             </div>
-        </div>
+          </div>
+        </a>
+      </div>
     </div>
-    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-warning shadow-sm h-100 py-2">
-            <div class="card-body">
-                <a [routerLink]="['/technologies']">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Technologies</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">850</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa fa-desktop fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </a>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+    <div class="card border-left-primary shadow-sm h-100 py-2">
+      <div class="card-body">
+        <a [routerLink]="['/faculties']">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="
+                  text-xs
+                  font-weight-bold
+                  text-primary text-uppercase
+                  mb-1
+                "
+              >
+                Total Faculties
+              </div>
+              <div
+                class="h5 mb-0 font-weight-bold text-gray-800"
+                *ngIf="faculties$ | async as faculties"
+              >
+                {{ faculties.length }}
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-        <div class="card border-left-info shadow-sm h-100 py-2">
-            <div class="card-body">
-                <a [routerLink]="['/batches']">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Total Batches</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">1435</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fa fa-calendar fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </a>
+            <div class="col-auto">
+              <i class="fa fa-users fa-2x text-gray-300"></i>
             </div>
-        </div>
+          </div>
+        </a>
+      </div>
     </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+    <div class="card border-left-warning shadow-sm h-100 py-2">
+      <div class="card-body">
+        <a [routerLink]="['/technologies']">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="
+                  text-xs
+                  font-weight-bold
+                  text-primary text-uppercase
+                  mb-1
+                "
+              >
+                Technologies
+              </div>
+              <div
+                class="h5 mb-0 font-weight-bold text-gray-800"
+                *ngIf="technologies$ | async as technologies"
+              >
+                {{ technologies.length }}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fa fa-desktop fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+    <div class="card border-left-info shadow-sm h-100 py-2">
+      <div class="card-body">
+        <a [routerLink]="['/batches']">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="
+                  text-xs
+                  font-weight-bold
+                  text-primary text-uppercase
+                  mb-1
+                "
+              >
+                Total Batches
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">1435</div>
+            </div>
+            <div class="col-auto">
+              <i class="fa fa-calendar fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <div class="c-panel">
-            <div class="c-panel-body">
-                <h5 class="title text-primary">
-                    Student Information - <small class="text-secondary">Month</small>
-                </h5>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped" id="data">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Joined Date</th>
-                                <th>Referred By</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor='let student of students'>
-                                <td>{{student.id}}</td>
-                                <td>{{student.name}}</td>
-                                <td>{{student.email}}</td>
-                                <td>{{student.mobile}}</td>
-                                <td>{{student.date}}</td>
-                                <td>{{student.referred}}</td>
-                                <td><a class="badge bg-success">Active</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  <div class="col-md-12">
+    <div class="c-panel">
+      <div class="c-panel-body">
+        <h5 class="title text-primary">
+          Student Information - <small class="text-secondary">Month</small>
+        </h5>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped" id="data">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Joined Date</th>
+                <th>Referred By</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students">
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.mobile }}</td>
+                <td>{{ student.date }}</td>
+                <td>{{ student.referred }}</td>
+                <td><a class="badge bg-success">Active</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 </div>
